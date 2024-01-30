@@ -2,21 +2,28 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static int frameStickMeters = 6;
     private static float quantityFramesMeters;
     private static int quantityFrameSticks;
+    private static float wainscotingWidth;
+    private static float area;
 
     public static void main(String[] args) {
 
         Scanner in = new Scanner(System.in);
-        float width, height, area;
+        float width, height;
 
         //float quantityFrameSticks;
-        int frameStickMeters = 6;
+
 
         System.out.println("Enter the width of your gate in meters: ");
         width = in.nextFloat();
         System.out.println("Enter the height of your gate in meters: ");
         height = in.nextFloat();
+        System.out.println("Enter the wainscoting width in meters: ");
+        wainscotingWidth = in.nextFloat();
+
+
 
         area = width * height;
         System.out.println("Your gate have " + area + "m².");
@@ -30,36 +37,32 @@ public class Main {
         //Caution the result of quantityFrameSticks needs to be int.
         quantityFrameSticks = (int) (quantityFramesMeters / frameStickMeters);
         //System.out.println("Quantity of frames to manufacture the gate structure: " + quantityFrameSticks + "und");
-        if (quantityFrameSticks % 1 == 0 && quantityFrameSticks % frameStickMeters == 0) {
+        if (quantityFramesMeters % 1 == 0 && quantityFramesMeters % frameStickMeters == 0) {
             System.out.println("Quantity of frames to manufacture the gate structure: " + quantityFrameSticks + "unt");
 
         } else {
                 quantityFrameSticks = (int) Math.ceil(quantityFrameSticks);
                 quantityFrameSticks = quantityFrameSticks + 1;
-                System.out.println("Quantity of frames to purchase will be greater than the quantity needed to manufacture the gate structure: " + quantityFrameSticks + "un");
+                System.out.println("Quantity of frames to purchase will be greater than the quantity needed to manufacture the gate structure: " + quantityFrameSticks + "unt");
+        }
+        aluminiumPaneling();
+
+    }
+
+    public static void aluminiumPaneling() {
+        float quantityWainscotingMeters;
+        int quantityWainscotingUnits;
+
+        quantityWainscotingMeters = area / wainscotingWidth;
+        System.out.println("The wainscoting quantity in meters is: " + quantityWainscotingMeters + "m.");
+
+        quantityWainscotingUnits = (int) Math.ceil(quantityWainscotingMeters / frameStickMeters);
+        if (quantityWainscotingUnits == 1) {
+            System.out.println("The wainscoting quantity units is: " + quantityWainscotingUnits + "unt.");
+        } else {
+            System.out.println("The wainscoting quantity units is: " + quantityWainscotingUnits + "unts.");
         }
 
-        //askForMoreMeters(quantityFramesMeters);
-        //askForMoreFrames(quantityFrameSticks);
-
     }
 
-
-    //Method askForMoreMeters, the objective this method is to add an additional 5% to the number of meters
-    //needed to manufacture the gate frame
-    /*public static void askForMoreMeters(float quantityFramesMeters) {
-       // float moreMeters;
-        // totalSticksMeters = (float) (quantityFrameMeters + (quantityFrameMeters * 0.10));
-        float totalSticksMeters = (float) (Main.quantityFramesMeters + (Main.quantityFramesMeters * 0.10));
-        System.out.println("The total meters quantity of frames to ask for more is: " + totalSticksMeters + "m");
-
-    }
-
-    public static void askForMoreFrames(float quantityFrameSticks) {
-        // float moreMeters;
-        // totalSticksMeters = (float) (quantityFrameMeters + (quantityFrameMeters * 0.10));
-        float totalSticks = (float) (Main.quantityFrameSticks + (Main.quantityFrameSticks * 0.10));
-        System.out.println("The total quantity of frames to ask for more is: " + totalSticks);
-
-    } */
 }
